@@ -1,3 +1,1 @@
 # CheckShoes
-
-salut les pds
