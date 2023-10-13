@@ -1,0 +1,56 @@
+{
+    "@context": [
+        "https://ref.gs1.org/standards/epcis/2.0.0/epcis-context.jsonld",
+        {
+            "status": "status"
+        }
+    ],
+    "type": "EPCISDocument",
+    "schemaVersion": "2.0",
+    "creationDate": "2023-10-13T18:42:03.89Z",
+    "epcisBody": {
+        "eventList": [
+            {
+                "type": "ObjectEvent",
+                "eventTime": "2018-01-30T11:21:14-07:00",
+                "recordTime": "2018-01-30T11:21:14-07:00",
+                "eventTimeZoneOffset": "-05:00",
+                "eventID": "urn:uuid:31a49992-415c-44f6-9326-15dda1efab48",
+                "epcList": [
+                    "https://id.gs1.org/01/01200009000011/21/900000194726"
+                ],
+                "action": "OBSERVE",
+                "bizStep": "urn:epcglobal:cbv:bizstep:receiving",
+                "disposition": "urn:epcglobal:cbv:disp:receiving",
+                "readPoint": {
+                    "id": "urn:epc:id:sgtin:00009.94726"
+                },
+                "bizLocation": {
+                    "id": "urn:epcglobal:id:sgln:00009.002"
+                },
+                "quantityList": [
+                    {
+                        "epcClass": "https://id.gs1.org/01/01200009000011/10/900000194726",
+                        "quantity": 20,
+                        "uom": "D33"
+                    }
+                ],
+                "sourceList": [
+                    {
+                        "type": "urn:epcglobal:cbv:sdt:owning_party",
+                        "source": "urn:epcglobal:id:sgln:00009.001"
+                    }
+                ],
+                "destinationList": [
+                    {
+                        "type": "urn:epcglobal:cbv:sdt:owning_party",
+                        "destination": "urn:epcglobal:id:sgln:00009.002"
+                    }
+                ],
+                "extension": {
+                  "status":"valid"
+                }
+            }
+        ]
+    }
+}
