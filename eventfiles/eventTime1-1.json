@@ -31,8 +31,8 @@
                 "quantityList": [
                     {
                         "epcClass": "https://id.gs1.org/01/01200009000011/10/900000194726",
-                        "quantity": 20,
-                        "uom": "D33"
+                        "quantity": 1,
+                        "uom": "WSD"
                     }
                 ],
                 "sourceList": [

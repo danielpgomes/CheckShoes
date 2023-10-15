@@ -32,7 +32,7 @@
                     {
                         "epcClass": "https://id.gs1.org/01/01200009000028/10/900000194727",
                         "quantity":2,   
-                        "uom":"D30"
+                        "uom":"WSD"
                     }
                 ],
                 "sourceList": [
