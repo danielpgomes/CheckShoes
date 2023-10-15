@@ -25,9 +25,12 @@ async function recherche(req, res) {
         const data = await fs.readFile(filePath, 'utf8');
         const event = JSON.parse(data);
 
+        // parcourir les .json et trouver le champ que nous souhaitons
         for (const epc of event.epcisBody.eventList[0].epcList) {
+          // pour aller au bon endroit du lien
           const parts = epc.split('/');
           const numeroEPC = parts[4];
+          // si un numéro est trouvé, alors nous ajoutons le fichier à la liste des événements
           if (numeroEPC === numeroRecherche) {
             console.log('Fichier correspondant trouvé :', file);
             console.log('Contenu du fichier :', event);
@@ -39,9 +42,11 @@ async function recherche(req, res) {
       }
     }
 
+    // si au moins un fichier est trouvé, nous affichons la liste en json
     if (events.length > 0) {
       res.json(events);
     } else {
+      // sinon nous renvoyons une erreur 404
       res.status(404).json({
         type: "epcisException:NoSuchResourceException",
         title: "Resource not found",
