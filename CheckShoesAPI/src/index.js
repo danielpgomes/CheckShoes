@@ -6,52 +6,56 @@ const port = 9001
 const fs = require('fs').promises
 // module pour travailler les chemins de fichier
 const path = require('path')
+const { EventEmitter } = require('stream')
 
-// chemin à changer en respectant le standard EPCIS 2.0
-app.get('/', async (req, res) => {
 
-  // attention le repertoire ou est stocké les fichiers sont pas les mêmes chez vous !!!
+// création de la fonction pour appel
+async function recherche(req, res) {
+  const numeroRecherche = req.params.numero;
   const diretoryPath = 'C:/CheckShoesv1/CheckShoes/eventfiles';
-  try {
-    // récupère les fichiers du directory
-    const files = await fs.readdir(diretoryPath);
 
+  try {
+    const files = await fs.readdir(diretoryPath);
     const events = [];
 
-    // parcourir les fichiers
-    for (const file of files){
-
-      // gère déjà les chemins de fichier en parcourant le directory
+    for (const file of files) {
       const filePath = path.join(diretoryPath, file);
-      try{
-        // lire le fichier en fichier txt
+
+      try {
         const data = await fs.readFile(filePath, 'utf8');
-        // serialize le fichier txt 
         const event = JSON.parse(data);
 
-        const numeroRecherche = '01200009000011';
-        console.log("Voici le code chaussure : " + numeroRecherche);
-
         for (const epc of event.epcisBody.eventList[0].epcList) {
-            if (epc.includes(numeroRecherche)) {
-              console.log('Fichier correspondant trouvé :', file);
-              console.log('Contenu du fichier :', event);
-              events.push(event);
-            }
+          const parts = epc.split('/');
+          const numeroEPC = parts[4];
+          if (numeroEPC === numeroRecherche) {
+            console.log('Fichier correspondant trouvé :', file);
+            console.log('Contenu du fichier :', event);
+            events.push(event);
           }
-        // ajoute un event
-        //events.push(event);
+        }
       } catch (readError) {
         console.error('Error reading files', readError);
       }
     }
-    // la liste d'event en json dans le HTTP  
-    res.json(events);
 
-  } catch(error) {
+    if (events.length > 0) {
+      res.json(events);
+    } else {
+      res.status(404).json({
+        type: "epcisException:NoSuchResourceException",
+        title: "Resource not found",
+        status: 404
+      });
+    }
+  } catch (error) {
     res.status(500).send('Error reading directory' + error);
   }
-})
+}
+
+// Utilisation de la fonction recherche pour la route en respectant le standard EPCIS 2.0
+app.get('/queries/:numero', recherche);
+
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
