@@ -10,10 +10,10 @@ const { EventEmitter } = require('stream')
 
 
 // création de la fonction pour appel
-async function recherche(req, res) {
+async function Poll(req, res) {
   const numeroRecherche = req.params.numero;
   const diretoryPath = 'C:/CheckShoesv1/CheckShoes/eventfiles';
-
+  // recherche et lecture des fichiers json dans le dossier "eventfiles"
   try {
     const files = await fs.readdir(diretoryPath);
     const events = [];
@@ -41,25 +41,19 @@ async function recherche(req, res) {
         console.error('Error reading files', readError);
       }
     }
-
     // si au moins un fichier est trouvé, nous affichons la liste en json
     if (events.length > 0) {
       res.json(events);
     } else {
-      // sinon nous renvoyons une erreur 404
-      res.status(404).json({
-        type: "epcisException:NoSuchResourceException",
-        title: "Resource not found",
-        status: 404
-      });
-    }
+      // Si la liste est vide, renvoyer simplement une liste vide (M.Stübi)
+        res.json([]);
+      }
   } catch (error) {
     res.status(500).send('Error reading directory' + error);
   }
 }
-
 // Utilisation de la fonction recherche pour la route en respectant le standard EPCIS 2.0
-app.get('/queries/:numero', recherche);
+app.get('/queries/:numero', poll);
 
 
 app.listen(port, () => {
