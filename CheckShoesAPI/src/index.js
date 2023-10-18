@@ -29,11 +29,9 @@ async function poll(req, res) {
         for (const epc of event.epcisBody.eventList[0].epcList) {
           // pour aller au bon endroit du lien
           const parts = epc.split('/');
-          const numeroEPC = parts[4];
+          const numero_sGTIN = parts[4];
           // si un numéro est trouvé, alors nous ajoutons le fichier à la liste des événements
-          if (numeroEPC === numeroRecherche) {
-            console.log('Fichier correspondant trouvé :', file);
-            console.log('Contenu du fichier :', event);
+          if (numero_sGTIN === numeroRecherche) {
             events.push(event);
           }
         }
@@ -54,6 +52,7 @@ async function poll(req, res) {
 }
 // Utilisation de la fonction recherche pour la route en respectant le standard EPCIS 2.0
 app.get('/queries/:numero', poll);
+
 
 
 app.listen(port, () => {
