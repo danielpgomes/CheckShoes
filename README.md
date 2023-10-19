@@ -21,9 +21,11 @@ The command : git clone https://github.com/danielpgomes/CheckShoes
 
 - run `node index.js` if everything went okay you can see this message in your termnial `App listening on port (the port you choose, normally is 9001 by default)`
 
-- If not, maybe there is a problem with the port number and need to change it manually in the index.js at the line 4 
+- If not, maybe there is a problem with the port number and need to change it manually in the index.js at the line 4
 
+##### Important notice 
 
+The `eventfiles` are stored in a local machine, so you will need to change the directory manually at the line 16. You need to put the path from the local disk of the eventfiles that are stored in your machine. 
 
 
 
