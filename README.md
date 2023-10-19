@@ -11,17 +11,17 @@ Github URL : https://github.com/danielpgomes/CheckShoes
 
 The command : git clone https://github.com/danielpgomes/CheckShoes
 
-- Open the files that we have sent you (personnally) with VScode abd be sure you are in the directory of CheckShoesAPI `CheckShoes/CheckShoesAPI`
+- Open the files with VScode and be sure you are in the directory of CheckShoesAPI `CheckShoes/CheckShoesAPI`
 
 - To run the command after, you need to install `npm` at this official URL : https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
-- run this command `npm install` to install aditionnal package from the file `package.json
+- run this command `npm install` in the `/checkShoesAPI` to install aditionnal package from the file `package.json`
 
 - Go to the `/src` path 
 
-- run `node index.js` if everything went okay you can see this message in your termnial `App listening on port 9001`
+- run `node index.js` if everything went okay you can see this message in your termnial `App listening on port (the port you choose, normally is 9001 by default)`
 
-- If not, maybe there is a problem with the port number and need to change it manually in the index.js at the line 4 `const port = 9001`
+- If not, maybe there is a problem with the port number and need to change it manually in the index.js at the line 4 
 
 
 
