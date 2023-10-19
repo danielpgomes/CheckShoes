@@ -13,7 +13,7 @@ const { EventEmitter } = require('stream')
 async function poll(req, res) {
   const numeroRecherche = req.params.numero;
   // changer le chemin où se trouvent les eventfiles car ils sont stockés en local
-  const diretoryPath = 'C:/CheckShoesv1/CheckShoes/eventfiles';
+  const diretoryPath = 'C:/Users/Luca/Desktop/CheckShoes/eventfiles';
   // recherche et lecture des fichiers json dans le dossier "eventfiles"
   try {
     const files = await fs.readdir(diretoryPath);
